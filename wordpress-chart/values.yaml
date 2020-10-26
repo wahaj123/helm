@@ -1,0 +1,21 @@
+db:
+  deployment:
+    app: wordpress
+    name: wordpress-mysql
+    tier: mysql
+    strategy: Recreate
+    containers:
+      image: mysql:5.6
+      name: mysql
+
+wp:
+  deployment:
+    name: wordpress
+    app: wordpress
+    tier: frontend
+    strategy: Recreate
+    containers:
+      image: wordpress:4.8-apache
+      name: wordpress
+  service:
+    type: LoadBalancer

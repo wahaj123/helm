@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.db.deployment.name}}
+  labels:
+    app: {{.Values.db.deployment.app}}
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.db.deployment.app}}
+      tier: {{.Values.db.deployment.tier}}
+  strategy:
+    type: {{.Values.db.deployment.strategy}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.db.deployment.app}}
+        tier: {{.Values.db.deployment.tier}}
+    spec:
+      containers:
+      - image: {{.Values.db.deployment.containers.image}}
+        name: {{.Values.db.deployment.containers.name}}
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: wahaj123a
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim

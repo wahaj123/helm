@@ -1,0 +1,12 @@
+deployment:
+  name: hello-python-helm
+  replica: 2
+
+containers:
+  name: hello-python
+  image: wahaj123/hi-python:latest
+
+service:
+    type: NodePort
+    nodePort: 30011
+    targetPort: 5000
