@@ -8,5 +8,5 @@ containers:
 
 service:
     type: NodePort
-    nodePort: 30011
+    nodePort: 30010
     targetPort: 5000
