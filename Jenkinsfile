@@ -12,11 +12,10 @@ pipeline {
                 """, returnStdout: true)
                 sh script: '''
                 #!/bin/bash 
+                cd helm
+                cd python-chart
                 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
                 chmod +x ./kubectl
-                cd python-chart
-                ./kubectl apply -f rbac-config.yaml
-                helm init --service-account tiller --history-max 200 
                 helm install --name python-chart . 
                 ''' 
             }
